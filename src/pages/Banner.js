@@ -14,14 +14,20 @@ function Banner() {
     
  
 const items = [
-  <img className='lg:h-[500px] lg:ml-[30%] h-[300px] object-contain w-full lg:w-[500px] md:h-[400px] ' src={`${original}${movie?.poster_path}`} onDragStart={handleDragStart} role="presentation" />,
-  <img  className='lg:h-[500px] object-contain lg:w-full'  src={`${original}${movie?.backdrop_path}`} onDragStart={handleDragStart} role="presentation" />,
+  <img className='lg:h-[450px] mt-[2%] lg:ml-[30%] h-[500px] object-contain w-full lg:w-[500px] md:h-[400px] ' src={`${original}${movie?.poster_path}`} onDragStart={handleDragStart} role="presentation" />,
+    <img  className='lg:h-[400px] object-contain md:mt-[5%] mt-[30%] md:
+    lg:mt-[5%] w-[600] lg:w-full'  src={`${original}${movie?.backdrop_path}`} onDragStart={handleDragStart} role="presentation" />,
 
   
 ];
     return(
-        <div className=''>
-         <AliceCarousel autoPlay  autoPlayInterval={2000} mouseTracking infinite disableButtonsControls disableSlideInfo  disableDotsControls animationDuration={1000} items={items} />
+        <div>
+
+
+        <div className='bg-gradient-to-r from-black to-red-800'>
+         <AliceCarousel autoPlay  autoPlayInterval={2500} mouseTracking infinite disableButtonsControls disableSlideInfo  disableDotsControls animationDuration={2000} items={items} />
+        </div>
+
         </div>
     )
 }

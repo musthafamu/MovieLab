@@ -10,7 +10,7 @@ function BannerProvider({children}){
  const fetch=async()=>{
     const res=await axios.get(requests.requestPopular)
     setBanner(res.data.results)
-    console.log(res.data.results)
+    
 
  }
  useEffect(()=>{
