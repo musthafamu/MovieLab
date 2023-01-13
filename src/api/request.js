@@ -10,7 +10,7 @@ export const unavailable =
 
 
 const requests = {
-  requestPopular: `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=200`,
+  requestPopular: `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`,
   Trending:`https://api.themoviedb.org/3/trending/all/day?api_key=${key}&page=1`,
     search:`https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=avatar&page=1&include_adult=false`
 }; 
