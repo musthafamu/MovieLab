@@ -1,37 +1,38 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import {key} from '../api/request'
+import { Link,useNavigate } from "react-router-dom";
 
 export const Trending=createContext()
 
 function TrendingProvider({children}){
     const [data,setdata]=useState([])
-    const [page,setpage]=useState(1)
+    const [type,settype]=useState('')
+   
+    const navigate=useNavigate()
+    const Top=()=>{
+     
+        window.scroll(120,140)
+     
+    }
+    
+    
 
-    const increase=()=>{
-        setpage(page+1)
-        window.scroll(120,140)
-        console.log(page)
-    }
-    const decrease=()=>{
-        setpage(page-1)
-        window.scroll(120,140)
-        console.log(page)
-    }
-    
-    
     
     console.log()
     const fetch=async()=>{
-        const res=await axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${key}&page=${page}`)
+
+        // const res=await axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${key}&page=1`)
+        const res=await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`)
+        
         setdata(res.data.results)
      
     }
     useEffect(()=>{
      fetch()
-    },[page])
+    },[data])
     const value={
-        data,increase,decrease,page
+        data,Top, fetch
 
     }
     return(

@@ -1,23 +1,29 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
- import { Link, useNavigate, useParams } from 'react-router-dom'
-import { key } from '../api/request'
+import React, { useEffect, useState } from 'react'
+ import { Link, parsePath, useNavigate, useParams } from 'react-router-dom'
+import { key,original} from '../api/request'
 import { Trending, useTrending } from '../context/Trending.context'
 
 function Details() {
-  
-const {data}=useTrending()
-console.log(data)
-const navigate=useNavigate()
-const {id}=useParams()
-const single=data.find(data=>data.id=== parseInt(id))
-  const {overview,poster_path,media_type,vote_average,vote_count}=single
-console.log(single)
+  const {id}=useParams()
+   
+  const {page,data,fetch}=useTrending()
 
+
+  
+  
+   
+   
+ const sin=data.find(data=>data.id===parseInt(id))
+ 
+   
+useEffect(()=>{
+ fetch()
+},[sin,page])
   return (
-    <div>Details
+    <div>
       <div>
-        {overview}
+          {sin.id}
       </div>
     </div>
   )

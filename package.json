@@ -13,6 +13,10 @@
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "react-slick-carousel": "^0.14.9",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^8.4.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
