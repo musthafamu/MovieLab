@@ -8,16 +8,17 @@ import { AiFillFire } from "react-icons/ai";
 function Trending() {
   const [id,setid]=useState('')
   const navigate=useNavigate()
-  const {data,increase,decrease,page,details,Top}=useTrending()
+  const {data,Top}=useTrending()
   
   useEffect(()=>{
-   
-  },[page,details])
+
+  },[data])
+
   return (
     <div className='ml-[8vh] '>
-      <div className='bg-gradient-to-r from-indigo-900 to-blue-900 ml-0 rounded-[100px] m-2'>
-      <h1 className='text-red-400  items-center font-bold text-3xl flex p-7'>Trending <i className='mt-1 ml-4'><AiFillFire size={40} /></i></h1>
-
+      <div className='bg-gradient-to-r  from-indigo-900 to-blue-900  rounded-[100px] mt-3 mb-3 lg:text-center  '>
+      <h1 className='text-red-600 ml-[15vw] md:ml-[30vw] lg:ml-[35vw] font-bold text-5xl flex p-7'>Trending <i className='mt-1 ml-4'><AiFillFire size={50} /></i></h1>
+         
       </div>
       <div className=' grid grid-cols-2  sm:ml-[0%] md:ml-[0%] lg:ml-[0%] lg:grid-cols-5 gap-4  md:grid-cols-3 sm:grid-cols-3'>
        {data?.map((item)=>{
@@ -34,7 +35,7 @@ function Trending() {
       })}
       </div>
       <div className='flex justify-center p-[24px] mb-'>
-      <button onClick={Top} className='mr-8 font-serif bg-blue-700 pr-3 pl-3 w-[100px]'>Scroll Up</button>
+      <button onClick={Top}  className='mr-8 font-serif bg-blue-700 pr-3 pl-3 w-[100px]'>Scroll Up</button>
   
 
       </div>

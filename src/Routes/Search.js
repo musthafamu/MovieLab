@@ -6,12 +6,13 @@ import {Link,useNavigate} from 'react-router-dom'
 import { key,original,unavailable } from '../api/request'
 import {BsBadge4KFill,BsStarFill } from "react-icons/bs";
 import { useTrending } from '../context/Trending.context';
-import { useSearch } from '../context/Search.context'
+import { Serach, useSearch } from '../context/Search.context'
 
 function Search() {
 const {fetch,Top}=useTrending()
-const {onchange,search,data,movie,tv,toggle}=useSearch()
-// 
+const {onchange,search,setsearch ,data,movie,tv,toggle,handlesubmit}=useSearch()
+
+       
 
   const navigate=useNavigate()
   
@@ -22,7 +23,10 @@ const {onchange,search,data,movie,tv,toggle}=useSearch()
     <div className=' '>
      
       <div className='text-center  '>
-  <input placeholder='Search'  value={search} onChange={onchange}  className=' bg-blue-800/60 px-4
+
+
+        <form onSubmit={handlesubmit}>
+  <input placeholder='Search' value={search}  onChange={handlesubmit} className=' bg-blue-800/60 px-4
       lg:w-[400px]
       w-[250px]
       md:w-[300px]
@@ -34,20 +38,22 @@ const {onchange,search,data,movie,tv,toggle}=useSearch()
       outline-none
       focus:ring-blue-500 focus:border-blue-900 border-3 focus:ring-1 mt-3
 ' />
+        </form>
       {/* <img className='w-[200px]' src={`${original}${item.poster_path}`}/> */}
    
+
    <div className='mb-4'>
 
- {!toggle?<button className='bg-blue-800 font-bold w-[130px] rounded-sm' onClick={()=>movie('movie')}> Movie</button>:
+ {!toggle?<button className='bg-blue-800 font-bold w-[130px] py-1 rounded-sm' onClick={()=>movie('movie')}> Movie</button>:
  
-  <button className='bg-blue-800 w-[130px] font-bold rounded-sm' onClick={()=>tv('tv')}>Show</button>
+  <button className='bg-blue-800 py-1 w-[130px] font-bold rounded-sm' onClick={()=>tv('tv')}>Show</button>
  }
 
    </div>
 
  
 </div>
- <div className='grid grid-cols-2 lg:grid-cols-5 gap-4 md:grid-cols-3 sm:grid-cols-3'>
+ <div className='grid grid-cols-2 lg:grid-cols-5 gap-4 md:grid-cols-4  sm:grid-cols-3'>
   {data&&data?.map((item)=>{
     const {id}=item
      return (
@@ -70,7 +76,6 @@ const {onchange,search,data,movie,tv,toggle}=useSearch()
     )
   })}
 
-  {search&&<button onClick={Top} className='mr-8 font-serif ml-[40vw] bg-blue-700 pr-3 pl-3 mb-[40px] w-[100px]'>Scroll Up</button>}
  </div>
 
  { search&& search.includes(data)?  <p>Not Found</p>:null}
