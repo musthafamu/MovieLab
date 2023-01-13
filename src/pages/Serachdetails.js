@@ -34,7 +34,7 @@ function Serachdetails() {
 <div className='lg:flex p-3 md:flex '>
     <img className='w-[400px] h-[400px] ml-[10%] lg:ml-[1%]  object-contain  lg:h-[500px] lg:w-[500px]  '  src={ one.poster_path? `${original}${one.poster_path}`:unavailable} /> 
   
-  <div className='ml-2 '>
+  <div className='ml-2    hover:bg-sky-900 duration-200 '>
     <h1 className='text-center mb-3 font-bold text-4xl'>{one.title}</h1>
     <h1 className='lg:text-2xl'> <i className='font-bold lg:text-3xl'>REVIEW:</i> {one.overview}</h1>
     <h1 className='lg:text-2xl m-3 md:text-2xl'> <i className='font-bold lg:text-3xl'>RELEASE-DATE:</i>  {one.release_date}</h1>
@@ -50,10 +50,10 @@ function Serachdetails() {
       <h1 className='font-bold text-4xl mt-2'>RECOMMENDATION</h1>
       <div>
      <Link to='/'>
-      <button className='bg-red-700 p-1 m-3 w-[100px]  rounded-md '>Home</button>
+      <button className='bg-red-700 p-1 m-3 w-[100px] hover:bg-blue-700 duration-300 rounded-md '>Home</button>
      </Link>
      <Link to='/search'>
-      <button className='bg-red-700 ml-3 p-1 w-[100px] rounded-md'>Search</button>
+      <button className='bg-red-700 ml-3 p-1 w-[100px] hover:bg-blue-700 duration-300 rounded-md'>Search</button>
      </Link>
       </div>
       </div>
@@ -72,11 +72,16 @@ function Serachdetails() {
     
     <div className=''>
   
-   
-    <SwiperSlide className=''>
+    
+    <SwiperSlide className='mb-[15px]'>
+   <Link to='/search'>
+
+
     <img className='w-[120px] md:w-[200px] rounded-lg lg:w-[150px] border-2 border-white'  src={ data.poster_path? `${original}${data.poster_path}`:unavailable} />
+   </Link>
     </SwiperSlide>
    
+
       </div>
     </div>
   )

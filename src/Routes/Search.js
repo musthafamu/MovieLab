@@ -9,21 +9,25 @@ import { useTrending } from '../context/Trending.context';
 import { useSearch } from '../context/Search.context'
 
 function Search() {
-const {fetch}=useTrending()
-const {onchange,search,data}=useSearch()
+const {fetch,Top}=useTrending()
+const {onchange,search,data,movie,tv,toggle}=useSearch()
 // 
+
   const navigate=useNavigate()
   
   useEffect(()=>{
  fetch()
-  },[search])
+  },[search,tv])
   return (
     <div className=' '>
-      <div className='  '>
-  <input placeholder='Search'  value={search} onChange={onchange}  className='w-full
-    bg-blue-800/60
-      px-4
+     
+      <div className='text-center  '>
+  <input placeholder='Search'  value={search} onChange={onchange}  className=' bg-blue-800/60 px-4
+      lg:w-[400px]
+      w-[250px]
+      md:w-[300px]
       py-2
+      mb-4
       text-base
       border border-gray-300
       rounded
@@ -31,16 +35,26 @@ const {onchange,search,data}=useSearch()
       focus:ring-blue-500 focus:border-blue-900 border-3 focus:ring-1 mt-3
 ' />
       {/* <img className='w-[200px]' src={`${original}${item.poster_path}`}/> */}
+   
+   <div className='mb-4'>
 
+ {!toggle?<button className='bg-blue-800 font-bold w-[130px] rounded-sm' onClick={()=>movie('movie')}> Movie</button>:
+ 
+  <button className='bg-blue-800 w-[130px] font-bold rounded-sm' onClick={()=>tv('tv')}>Show</button>
+ }
+
+   </div>
+
+ 
 </div>
  <div className='grid grid-cols-2 lg:grid-cols-5 gap-4 md:grid-cols-3 sm:grid-cols-3'>
   {data&&data?.map((item)=>{
     const {id}=item
      return (
-      <Link to={`${id}`}>
+      <Link key={item.id} to={`${id}`}>
       
       
-      <div key={item.id}   className=' w-[200px] hover:bg-red-900 rounded-b-lg hover:border-[5px] duration-200 hover:border-red-900'>
+      <div   className=' w-[200px] hover:bg-red-900 rounded-b-lg hover:border-[5px] duration-200 hover:border-red-900'>
         <img className='w-[200px]' src={ item.poster_path? `${original}${item.poster_path}`:unavailable}/>
         <div className='flex justify-around font-serif'>
           <p>{item.title}</p>
@@ -55,9 +69,12 @@ const {onchange,search,data}=useSearch()
       </Link>
     )
   })}
+
+  {search&&<button onClick={Top} className='mr-8 font-serif ml-[40vw] bg-blue-700 pr-3 pl-3 mb-[40px] w-[100px]'>Scroll Up</button>}
  </div>
 
  { search&& search.includes(data)?  <p>Not Found</p>:null}
+ 
 </div>
   
 

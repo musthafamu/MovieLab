@@ -3,6 +3,8 @@ import { useTrending } from '../context/Trending.context'
 import Singlecontent from './singlecontent'
 import {Link, useNavigate } from 'react-router-dom'
 import Details from '../Routes/Details'
+import { AiFillFire } from "react-icons/ai";
+
 function Trending() {
   const [id,setid]=useState('')
   const navigate=useNavigate()
@@ -13,7 +15,10 @@ function Trending() {
   },[page,details])
   return (
     <div className='ml-[8vh] '>
-      <h1 className='text-red-400 p-7'>Trending</h1>
+      <div className='bg-gradient-to-r from-indigo-900 to-blue-900 ml-0 rounded-[100px] m-2'>
+      <h1 className='text-red-400  items-center font-bold text-3xl flex p-7'>Trending <i className='mt-1 ml-4'><AiFillFire size={40} /></i></h1>
+
+      </div>
       <div className=' grid grid-cols-2  sm:ml-[0%] md:ml-[0%] lg:ml-[0%] lg:grid-cols-5 gap-4  md:grid-cols-3 sm:grid-cols-3'>
        {data?.map((item)=>{
        
