@@ -11,7 +11,7 @@ function Singlecontent({item}) {
   return (
    
       <div>
-      <img className='w-[200px]' src={`${original}${poster_path}`} />
+      <img className='lg:w-[200px] w-[190px]' src={`${original}${poster_path}`} />
         <div className='flex justify-around font-serif'> </div>
       <div className='flex justify-around font-serif'>
         <p>{release_date}</p>

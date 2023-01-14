@@ -7,10 +7,11 @@ import { key,original,unavailable } from '../api/request'
 import {BsBadge4KFill,BsStarFill } from "react-icons/bs";
 import { useTrending } from '../context/Trending.context';
 import { Serach, useSearch } from '../context/Search.context'
+import { GrCheckboxSelected } from "react-icons/gr";
 
 function Search() {
 const {fetch,Top}=useTrending()
-const {onchange,search,setsearch ,data,movie,tv,toggle,handlesubmit}=useSearch()
+const {onchange,search,setsearch ,data,movie,tv,toggle,handlesubmit,details}=useSearch()
 
        
 
@@ -25,8 +26,8 @@ const {onchange,search,setsearch ,data,movie,tv,toggle,handlesubmit}=useSearch()
       <div className='text-center  '>
 
 
-        <form onSubmit={handlesubmit}>
-  <input placeholder='Search' value={search}  onChange={handlesubmit} className=' bg-blue-800/60 px-4
+        <form >
+  <input placeholder='Search'   onChange={handlesubmit} className=' bg-blue-800/60 px-4
       lg:w-[400px]
       w-[250px]
       md:w-[300px]
@@ -38,16 +39,17 @@ const {onchange,search,setsearch ,data,movie,tv,toggle,handlesubmit}=useSearch()
       outline-none
       focus:ring-blue-500 focus:border-blue-900 border-3 focus:ring-1 mt-3
 ' />
+
+
+
         </form>
-      {/* <img className='w-[200px]' src={`${original}${item.poster_path}`}/> */}
    
+   <div className='mb-4 font-bold '>
 
-   <div className='mb-4'>
+{toggle==false&&!toggle?<button className='mx-3 py-2.5 bg-red-700 inline-block px-6 py-bg2.5  text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:shadow-lg   focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg transition duration-150 ease-in-out' onClick={()=>movie('tv')}>Tv</button>:<button onClick={()=>movie('tv')} className='mx-3   bg-red-80 inline-block px-6 py-2.5 bg-blue-600  text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg transition duration-150 ease-in-out'> Tv</button>}
+{!toggle &&toggle==false?<button onClick={()=>movie('movie')} className='  mx-3 inline-block px-6 py-2.5 bg-blue-700 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md  hover:shadow-l focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out '>Movie</button>:<button className='mx-3 bg-red-80 inline-block px-6 py-2.5 bg-red-600  text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out' onClick={()=>tv('movie')}>Movie</button>}
 
- {!toggle?<button className='bg-blue-800 font-bold w-[130px] py-1 rounded-sm' onClick={()=>movie('movie')}> Movie</button>:
- 
-  <button className='bg-blue-800 py-1 w-[130px] font-bold rounded-sm' onClick={()=>tv('tv')}>Show</button>
- }
+
 
    </div>
 
@@ -78,7 +80,7 @@ const {onchange,search,setsearch ,data,movie,tv,toggle,handlesubmit}=useSearch()
 
  </div>
 
- { search&& search.includes(data)?  <p>Not Found</p>:null}
+ { search&&  search.includes(data)?  <p className='font-bold text-center text-4xl lg:mt-[13vw] mt-[30vw]'>Not Found 😒</p>:null}
  
 </div>
   
