@@ -25,8 +25,8 @@ function Serachdetails() {
     const [person,setperson]=useState([])
     const {id}=useParams()
     const moviefetch=async()=>{
-        const res=await axios.get(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${key}&language=en-US&page=1`)
-        setperson(res.data.results)
+      const res=await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${key}&language=en-US`)
+      setperson(res.data.cast)
       }
       const videofetch=async()=>{
         const res=await axios.get(`https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${key}&language=en-US`)
@@ -75,8 +75,7 @@ function Serachdetails() {
      
    
      
-    {Swiper? <h1 className='font-bold text-4xl mt-2'>You May Also Like</h1>:null}
-     
+    <h1 className='font-bold text-4xl p-2 ml-4'>Cast</h1> 
  <Swiper className='mt-5'
  
       spaceBetween={0}
@@ -100,8 +99,9 @@ function Serachdetails() {
     <SwiperSlide className='mb-[15px]'>
    
       
-    <div onClick={()=>details(data.id)} >
-    <img className='w-[120px] md:w-[200px] rounded-lg lg:w-[150px] border-2 border-white'  src={ data.poster_path? `${original}${data.poster_path}`:unavailable} />
+    <div >
+    <img className='w-[120px] md:w-[200px] rounded-lg lg:w-[150px] border-2 border-white'  src={ data.profile_path? `${original}${data.profile_path}`:unavailable} />
+    <h1 className='font-bold text-[14px]'>{data.name}</h1>
     </div>
   
 

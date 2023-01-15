@@ -1,33 +1,34 @@
 import React, { useEffect } from 'react'
-import { original } from '../api/request'
+import { original,unavailable } from '../api/request'
 import { useBanner } from '../context/Banner.context'
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-import { Action } from '@remix-run/router';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import {  Autoplay, Pagination} from 'swiper';
+import 'swiper/css/autoplay'
 
 
-function Banner() {
- const {banner}=useBanner()
- const handleDragStart = (e) => e.preventDefault();
-
- const movie=banner[Math.floor(Math.random() * banner.length)]
-    
- 
-const items = [
-  <img className='lg:h-[450px]  lg:ml-[30%]  h-[300px] mt-3  object-contain  lg:w-[500px] sm:h-[400px] md:h-[450px] ' src={`${original}${movie?.poster_path}`} onDragStart={handleDragStart} role="presentation" />,
-    <img  className='lg:h-[400px] object-contain md:mt-[5%] mt-[30%] md:
-    lg:mt-[5%] w-[600] lg:w-full'  src={`${original}${movie?.backdrop_path}`} onDragStart={handleDragStart} role="presentation" />,
-
-  
-];
-    return(
-        <div className=''>
 
 
-        <div className='bg-gradient-to-r from-black to-red-800 '>
-         <AliceCarousel autoPlay  autoPlayInterval={2500} mouseTracking infinite disableButtonsControls disableSlideInfo  disableDotsControls animationDuration={2000} items={items} />
+//  const movie=banner[Math.floor(Math.random() * banner.length)]
+
+function Banner(){
+    const handleDragStart = (e) => e.preventDefault();
+    const {banner}=useBanner()
+   
+    const items=banner.map((item)=>(
+        <div className='flex items-center justify-center duration-300'>
+    <img className='lg:w-[400px] md:w-[400px] h-[400px] lg:h-[600px] md:h-[600px] sm:h-[400px]'  src={ item.poster_path? `${original}${item.poster_path}`:unavailable} />
         </div>
+    ))
 
+    return(
+        <div>
+            
+
+
+ <AliceCarousel infinite  animationDuration={2000} autoPlayInterval={2500} disableButtonsControls disableDotsControls autoPlay mouseTracking items={items} />
         </div>
     )
 }

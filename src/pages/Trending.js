@@ -20,7 +20,7 @@ function Trending() {
       <h1 className='text-red-600 ml-[15vw] md:ml-[30vw] lg:ml-[35vw] font-bold text-5xl flex p-7'>Trending <i className='mt-1 ml-4'><AiFillFire size={50} /></i></h1>
          
       </div>
-      <div className=' grid grid-cols-2 gap-10  sm:ml-[0%] md:ml-[0%] lg:ml-[0%] lg:grid-cols-5 lg:gap-4 md:gap-4  md:grid-cols-3 sm:grid-cols-3'>
+      <div className=' grid grid-cols-2 gap-6  sm:ml-[0%] md:ml-[0%] lg:ml-[0%] lg:grid-cols-5 lg:gap-4 md:gap-4  md:grid-cols-3 sm:grid-cols-3'>
        {data?.map((item)=>{
        
         return(
