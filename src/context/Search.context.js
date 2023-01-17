@@ -16,18 +16,7 @@ function SerachProvider({children}){
 
     
 
-    const details=()=>{
-        
-        navigate('/search')
-       
     
-        
-   
-    
-        window.scroll(0,0)
-        
-       
-       }
       const entry=(e)=>{
         e.preventDefault();
         setsearch(search)
@@ -67,7 +56,7 @@ function SerachProvider({children}){
 
     
     const value={
-        onchange,search,data,search,setsearch,movie,tv,toggle,type,handlesubmit,details,entry,
+        onchange,search,data,search,setsearch,movie,tv,toggle,type,handlesubmit,entry,
         
     }
     return(

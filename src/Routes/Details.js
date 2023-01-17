@@ -45,7 +45,7 @@ useEffect(()=>{
  fetch()
  moviefetch()
  videofetch()
-},[])
+},[id])
   return (
   
     <div>

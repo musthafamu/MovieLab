@@ -24,11 +24,11 @@ function Banner(){
     ))
 
     return(
-        <div>
+        <div className='bg-gradient-to-r from-rose-900 to-black'>
             
 
 
- <AliceCarousel infinite  animationDuration={2000} autoPlayInterval={2500} disableButtonsControls disableDotsControls autoPlay mouseTracking items={items} />
+ <AliceCarousel infinite  animationDuration={1000} autoPlayInterval={2500} disableButtonsControls disableDotsControls autoPlay  items={items} />
         </div>
     )
 }

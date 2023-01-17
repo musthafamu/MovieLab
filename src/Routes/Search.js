@@ -63,7 +63,7 @@ const {onchange,search,setsearch ,data,movie,tv,toggle,handlesubmit,details}=use
       
       
       <div   className=' w-[200px] hover:bg-red-900 rounded-b-lg hover:border-[5px] duration-200 hover:border-red-900'>
-        <img className='w-[200px]' src={ item.poster_path? `${original}${item.poster_path}`:unavailable}/>
+        <img className=' w-[200px]' src={ item.poster_path? `${original}${item.poster_path}`:unavailable}/>
         <div className='flex justify-around font-serif'>
           <p>{item.title}</p>
          <div className='flex items-center' >  <i className='mr-2'><BsStarFill color='yellow'/></i>    {item.vote_average}</div>
