@@ -42,7 +42,7 @@ function Carousel({item}) {
   return (
     <div className='w-full'>
      
- <AliceCarousel responsive={responsive} disableButtonsControls  autoPlayInterval={2500} autoPlay disableSlideInfo disableDotsControls mouseTracking items={items} />
+ <AliceCarousel responsive={responsive} disableButtonsControls animationDuration={1000} infinite autoPlayInterval={2500} autoPlay disableSlideInfo disableDotsControls mouseTracking items={items} />
 
 
     </div>
