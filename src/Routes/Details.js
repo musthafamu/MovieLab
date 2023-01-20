@@ -3,128 +3,82 @@ import React, { useEffect, useState } from 'react'
  import { Link, parsePath, useNavigate, useParams } from 'react-router-dom'
 import { key,original,unavailable} from '../api/request'
 import { Trending, useTrending } from '../context/Trending.context'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { AiFillPlayCircle } from "react-icons/ai";
-import { Navigation, Autoplay, } from 'swiper';
 import {BsBadge4KFill,BsStarFill } from "react-icons/bs";
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
+import Carousel from '../pages/Carousel'
 
-import 'swiper/css';
-import 'swiper/css/autoplay'
-import { useSearch } from '../context/Search.context'
+
+
 
 function Details() {
-  const {id}=useParams()
-  
-
-
-   
-  const {page,data,fetch,type,}=useTrending()
-  const {details}=useSearch()
+  const {page}=useTrending()
+  const params=useParams()
+  const id=params.id
+  const [data,setdata]=useState([])
+  const [video,setvideo]=useState('')
   const [person,setperson]=useState([])
-     const [video,setvideo]=useState()
-  const videofetch=async()=>{
-    const res=await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${key}&language=en-US`)
-    setvideo(res.data.results[0].key)
+  const fetch=async()=>{
+    const res=await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${key}&language=en-US&page=${page}`)
+        setdata(res.data);
+      }
+      const castfetch=async()=>{
+        const res=await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${key}&language=en-US`)
+        console.log(res.data.cast)
+  setperson(res.data.cast)
+}
+const videofetch=async()=>{
+  const res=await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${key}&language=en-US`)
+  setvideo(res.data.results[0].key)
 
-  }
-  
- 
-  const moviefetch=async()=>{
-      const res=await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${key}&language=en-US`)
-     setperson(res.data.cast)
+}
+const rating=parseInt(data.vote_average)
 
-    }
-  
-  
-   
-   
- const sin=data.find(data=>data.id===parseInt(id))
- 
-   
 useEffect(()=>{
  fetch()
- moviefetch()
+castfetch()
  videofetch()
-},[id])
-  return (
-  
-    <div>
- <div className=''>
-<div className='lg:flex p-3 md:flex   '>
-    <img className='border-2 border-red-600 h-[400px] ml-[10%] lg:ml-[1%]  object-contain  lg:h-[500px]  lg:border-red-700  '  src={ sin.poster_path? `${original}${sin.poster_path}`:unavailable} /> 
-  
-  <div key={sin.vote_average} className='ml-2 hover:bg-sky-900 duration-200 '>
-    <h1 className='text-center mb-3 font-bold text-4xl'><i className='text-red-600'>TITLE:</i> {sin.title}</h1>
-    <h1 className='lg:text-2xl lg:leading-9 '> <i className='font-bold lg:text-3xl text-red-600'>REVIEW:</i> {sin.overview}</h1>
-    <h1 className='lg:text-2xl m-3 md:text-2xl'> <i className='font-bold lg:text-3xl text-red-600 '>RELEASE-DATE:</i>  {sin.release_date}</h1>
-    <h1 className='font-bold flex text-3xl'><i className='lg:text-3xl text-red-600 '>RATING:</i> <i className='flex items-center px-3'>  <BsStarFill color='yellow' className='mr-2' />  {sin.vote_average}</i></h1>
+},[])
 
-  </div>
+const genre=data.genres
+console.log(data)
+
+  
+return(
+  <div key={data.id} className='ml-3 overflow-hidden'>
+    <h1 className='font-bold  p-3 text-4xl'>{data.original_title}</h1>
+     <div className='lg:flex  py-2 xl:flex'>
+     <img className='w-[200px] lg:w-[350px] lg:h-[550px] rounded-lg ' src={ data.poster_path?`${original}${data.poster_path}`:unavailable}/>  
+      <div>
+     <div className='flex py-2 '>
+      <h1  className='px-3'>Genre:</h1>
+      {genre?genre.map((item)=>{
+    return(
+      <h1 className='px-1 hover:text-red-500' key={item.id}> {item.name}/</h1>
+    )
+      }):<p>Not available</p>}
+     </div>
+      <h1 className='px-3 py-2'>{data.overview}</h1>
+      <h1 className='px-3'>{data.original_language}</h1>
+      <h1  className='flex py-2 px-3 items-center'>{rating} <i className='ml-2'><BsStarFill color='yellow'/></i></h1>
+      <h1 className='px-3 py-3'>{data.release_date}</h1>
+      <div className='lg:px-[10vw] aspect-h-8 aspect-w-16 lg:aspect-h-5'>
+<iframe className=''  height="200" src={`https://www.youtube.com/embed/${video}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      </div>
+      
+      </div>
+
+     </div>
+
+
+<h1 className='pb-4 text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-yellow-500 to-white'>Cast</h1>
+<div className=' w-full py-2' >
+     <Carousel  item={person}/>
+
 </div>
-
-
-
-      </div>
-   <a  className='flex items-center font-bold ml-[3%] lg:ml-[8%] text-2xl w-[150px] px-3 py-1 bg-red-600 text-white   leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-300 ease-in-out '  href={`https://www.youtube.com/watch?v=${video}`}> Trailer <AiFillPlayCircle className='text-2xl lg:4xl mt-1 ml-2'/></a> 
-
-      <div className='flex flex-col ml-4'>
-       
-      <div className='mt-4 lg:ml-16'>
-     <Link to='/'>
-     <button type="button" className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Home</button>
-     </Link>
-     <Link to='/search'>
-     <button type="button" className="inline-block ml-3  px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Search</button>
-     </Link>
-      </div>
-      </div>
-     
-  
-      <h1 className='font-bold text-4xl p-2 ml-4'>Cast</h1> 
-     
- <Swiper className='mt-5'
- modules={[Autoplay]}
-      spaceBetween={0}
-      Navigation={3}
-      slidesPerView={6}
-    autoplay={{delay:5000} }
-    
-    
-     
-    >
-
-
-{person.map((data)=>{
- 
-  return(
-    <div key={data.id} className=''>
-    
-    <div className=''>
-  
-   
-    <SwiperSlide className='mb-[15px]'>
-    <div>
-    <img className='w-[120px] md:w-[200px] rounded-lg lg:w-[150px] border-2 border-white'  src={ data.profile_path? `${original}${data.profile_path}`:unavailable} />
-    <h1 className='font-bold'>{data.name}</h1>
-    </div>
-
- 
-    </SwiperSlide>
-   
-      </div>
-    </div>
-  )
-})}
- </Swiper>
- <div></div>
-</div>
-
-
-   
-
-
-
-  )
-}
+        
+     </div>
+    )}
 
 export default Details
+  

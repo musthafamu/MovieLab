@@ -7,33 +7,32 @@ export const Trending=createContext()
 
 function TrendingProvider({children}){
     const [data,setdata]=useState([])
-    const [scroll,setscroll]=useState()
-
+    const [type,settype]=useState('movie')
+    const [page,setpage]=useState(1)
     
-    
-    const Top=()=>{
-        setscroll(
-
-            window.scroll(120,140)
-        )
+    const pagination=(number)=>{
+         setpage(number)
+        window.scroll(0,0)
     }
-    
-    
-
-    
-    
+    const increase=()=>{
+        setpage(prev=>prev+1)
+  window.scroll(0,0)
+    }
+    const decrease=()=>{
+        if(page >1){
+            setpage(prev=>prev-1)
+      window.scroll(0,0)
+        }
+    }
     const fetch=async()=>{
-
-        const res=await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${key}&language=en-US&page=1`)
-        
+         const res=await axios.get(`https://api.themoviedb.org/3/trending/${type}/day?api_key=${key}&page=${page}`)
         setdata(res.data.results)
-     
     }
     useEffect(()=>{
      fetch()
-    },[data])
+    },[page])
     const value={
-        data,Top, fetch
+        data,increase,decrease ,page, fetch,type,pagination
 
     }
     return(

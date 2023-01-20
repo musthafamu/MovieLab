@@ -8,8 +8,8 @@ import BannerProvider from './context/Banner.context';
 import Banner from './pages/Banner';
 import Details from './Routes/Details';
 import TrendingProvider, { Trending } from './context/Trending.context';
-import SerachProvider from './context/Search.context';
-import Serachdetails from './pages/Serachdetails';
+import SearchProvider from './context/search.context';
+
 
 function App() {
   return (
@@ -18,17 +18,15 @@ function App() {
      <div> </div>
       <Navbar/> 
       <TrendingProvider>
-      <SerachProvider>
+<SearchProvider>
 
      <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/search' element={<Search/>}/>
       <Route path='/:id' element={<Details/>}/>
-      <Route path='/search/:id' element={<Serachdetails/>}/>
      </Routes>
-
-      </SerachProvider>
-      
+</SearchProvider>
+ 
       </TrendingProvider>
      </BrowserRouter>
 

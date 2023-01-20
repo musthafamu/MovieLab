@@ -6,39 +6,39 @@ import Details from '../Routes/Details'
 import { AiFillFire } from "react-icons/ai";
 
 function Trending() {
-  const [id,setid]=useState('')
-  const navigate=useNavigate()
-  const {data,Top}=useTrending()
+ 
+ 
+  const {data,page,increase,decrease,pagination}=useTrending()
+ 
   
-  useEffect(()=>{
-
-  },[data])
-
+  
   return (
-    <div className='lg:ml-[8vh] ml-[1vw] '>
-      <div className='bg-gradient-to-r  from-indigo-900 to-blue-900  rounded-[100px] mt-3 mb-3 lg:text-center  '>
-      <h1 className='text-red-600 ml-[15vw] md:ml-[30vw] lg:ml-[35vw] font-bold text-5xl flex p-7'>Trending <i className='mt-1 ml-4'><AiFillFire size={50} /></i></h1>
-         
+    <div className='flex flex-col  items-center '>
+      <div className='flex justify-center rounded-[100px]  w-full bg-gradient-to-r from-blue-600 to-violet-600'>
+      <h1 className='flex py-7 items-center font-serif text-5xl'>Trending <i className='mt-1 ml-4'><AiFillFire color='yellow' size={50} /></i></h1>
       </div>
-      <div className=' grid grid-cols-2 gap-6  sm:ml-[0%] md:ml-[0%] lg:ml-[0%] lg:grid-cols-5 lg:gap-4 md:gap-4  md:grid-cols-3 sm:grid-cols-3'>
-       {data?.map((item)=>{
-       
-        return(
-          <div key={item.id}  className='w-[200px] hover:bg-red-900 rounded-b-lg hover:border-[5px] duration-200 hover:border-red-900'>
-            <Link to={`${item.id}`}>
-            
-            <Singlecontent item={item} />
-            
+      <div className='flex items-center  justify-evenly'>
+       </div>
+      <div  className='  grid  grid-cols-1  max-w-[1640px]  overflow-hidden lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 gap-1  '>
+      {
+        data?data.map((item)=>{
+          
+          return(
+            <Link to={`/${item.id}`}>
+            <Singlecontent key={item.id} item={item} />
             </Link>
-          </div>
-        )
-      })}
-      </div>
-      <div className='flex justify-center p-[24px] mb-'>
-      <button onClick={Top}  className='lg:mr-8 md:mr-8 font-serif bg-blue-700 pr-3 pl-3 w-[100px]'>Scroll Up</button>
-  
-
-      </div>
+          )
+        }):<p>Loading</p>
+      }
+    </div>
+    <div className='flex justify-center  mb-4 mt-4'>
+      <button onClick={decrease} className='px-6 py-2 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'>Prev</button>
+      <button onClick={()=>pagination(1)} className='px-2.5 py-2 mx-2 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'>1</button>
+      <button onClick={()=>pagination(2)} className='px-2.5 py-2 mx-2 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'>2</button>
+      <button onClick={()=>pagination(3)} className='px-2.5 py-2 mx-2 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'>3</button>
+      <button onClick={()=>pagination(4)} className='px-2.5 py-2 mx-2 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'>4</button>
+      <button onClick={increase} className='px-6 py-2 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'>Next</button>
+    </div>
     </div>
   )
 }
